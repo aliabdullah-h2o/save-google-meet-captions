@@ -4,10 +4,14 @@
     "version": "0.1",
     "manifest_version": 3,
     "permissions": [
-      "activeTab"
+      "activeTab",
+      "scripting",
+      "tabs"
     ],
-    "action": {
-      "default_icon": "hello-16.png",
-      "default_popup": "popup.html"
-    }
+    "content_scripts": [
+      {
+          "matches": ["https://meet.google.com/*"],
+          "js": ["content-script.js"]
+      }
+    ]
   }
