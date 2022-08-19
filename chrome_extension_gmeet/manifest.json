@@ -1,0 +1,17 @@
+{
+    "name": "Writes",
+    "description": "This Extension Saves Meeting Transcript",
+    "version": "0.1",
+    "manifest_version": 3,
+    "permissions": [
+      "activeTab",
+      "scripting",
+      "tabs"
+    ],
+    "content_scripts": [
+      {
+          "matches": ["https://meet.google.com/*"],
+          "js": ["content-script.js"]
+      }
+    ]
+  }
