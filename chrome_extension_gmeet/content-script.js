@@ -1,7 +1,17 @@
-var observer = new MutationObserver(function (mutations) {
+var observerCC = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation){
-    console.log(document.getElementsByClassName("K6EKFb")[0].innerText);
+        console.log(mutation.target.outerText);
     });
 });
 
-observer.observe(document.documentElement,{attribute:true, subtree:true, attributeOldValue:true, characterDataOldValue:true, childList:true, characterData:true});
+var observerMain = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation){
+        console.log("ohohoshd");
+        if (mutation.target === document.querySelector(".K6EKFb")){
+            observerCC.observe(document.querySelector(".K6EKFb"), {attribute:false, subtree:true, attributeOldValue:false, characterDataOldValue:false, childList:false, characterData:false});
+            observerMain.disconnect()    
+        }
+    });
+});
+
+observerMain.observe(document.documentElement, {attribute:true, subtree:true, attributeOldValue:true, characterDataOldValue:true, childList:true, characterData:true});
