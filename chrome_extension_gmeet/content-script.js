@@ -5,7 +5,7 @@ const speakerNameClass = "zs7s8d.jxFHg"
 const speakerCaptionsParentClass = "Mz6pEf.wY1pdd"
 const speakerCaptionsClass = "iTTPOb.VbkSUe"
 
-
+let speaker = {"name": null, "message":null }
 let newMessage = "";
 let observerCC = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation){
@@ -13,6 +13,8 @@ let observerCC = new MutationObserver(function (mutations) {
             let addedNode = mutation.addedNodes[0];
             if (addedNode.nodeName == "DIV"){
                 console.log("Speaker Name: " + addedNode.innerText)
+                speaker["name"] = addedNode.innerText.split("\n")[0];
+                newMessage = "";
             }
             else if (addedNode.nodeName == "#text"){
                 console.log("Added Sentence: "+ addedNode.data);
@@ -76,8 +78,9 @@ let observerCC = new MutationObserver(function (mutations) {
             } 
         }
     });
+    speaker['message'] = newMessage;
     console.log("Final message: ");
-    console.log(newMessage);
+    console.log(speaker);
 });
 
 let observerMain = new MutationObserver(function (mutations) {
