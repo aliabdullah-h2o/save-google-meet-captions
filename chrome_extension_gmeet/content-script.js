@@ -5,10 +5,18 @@ const speakerNameClass = "zs7s8d.jxFHg"
 const speakerCaptionsParentClass = "Mz6pEf.wY1pdd"
 const speakerCaptionsClass = "iTTPOb.VbkSUe"
 
+let allSpeakers = []
 let speaker = {"name": null, "message":null }
 let newMessage = "";
 let observerCC = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation){
+        if (mutation.removedNodes.length == 1){
+            removedNode = mutation.removedNodes[0];
+            if (removedNode.nodeName == "DIV")
+            {
+                allSpeakers.push(speaker);
+            }
+        }
         if (mutation.addedNodes.length == 1){
             let addedNode = mutation.addedNodes[0];
             if (addedNode.nodeName == "DIV"){
@@ -79,8 +87,8 @@ let observerCC = new MutationObserver(function (mutations) {
         }
     });
     speaker['message'] = newMessage;
-    console.log("Final message: ");
-    console.log(speaker);
+    // console.log("Final message: ");
+    console.log(allSpeakers);
 });
 
 let observerMain = new MutationObserver(function (mutations) {
